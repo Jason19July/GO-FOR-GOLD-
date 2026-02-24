@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO-FOR-GOLD Exclusive Gateway</title>
+    
+    <!-- Memberstack Header Script -->
+    <script data-memberstack-app="app_cmlt23jfd002u0stjhljd13s9" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
+
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; padding: 50px; background: #1a1a1a; color: white; }
+        .container { background: #2a2a2a; padding: 40px; border-radius: 12px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 500px; width: 90%; }
+        .hidden { display: none; }
+        .gold-text { color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
+        .btn { display: block; background: #D4AF37; color: black; padding: 18px 25px; margin: 15px 0; text-decoration: none; border-radius: 8px; font-weight: bold; transition: transform 0.2s; }
+        .btn:hover { transform: scale(1.02); background: #f1c40f; }
+        .logout-link { margin-top: 20px; display: inline-block; color: #888; text-decoration: none; font-size: 0.9em; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="gold-text">GO-FOR-GOLD</h1>
+        <p>Premium Cohort Access</p>
+        <hr style="border: 0; border-top: 1px solid #444; margin: 25px 0;">
+        
+        <!-- PREMIUM CONTENT: Only visible to GO-FOR-GOLD members -->
+        <div id="premium-content" data-ms-content="pln_go-for-gold-club-membership-o0su0eqg">
+            <h2>Welcome, Member</h2>
+            <p>Select your exclusive Gamma training:</p>
+            <a href="YOUR_GAMMA_LINK_1" class="btn" target="_blank">Access Course Alpha</a>
+            <a href="YOUR_GAMMA_LINK_2" class="btn" target="_blank">Access Course Beta</a>
+            <a href="YOUR_GAMMA_LINK_3" class="btn" target="_blank">Access Course Gamma</a>
+        </div>
+
+        <!-- PUBLIC/NO ACCESS: Visible to everyone else -->
+        <div id="no-access" data-ms-content="!pln_go-for-gold-club-membership-o0su0eqg">
+            <p>This area is reserved for <strong>GO-FOR-GOLD</strong> members only.</p>
+            <a href="#/ms/signup/pln_go-for-gold-club-membership-o0su0eqg" class="btn">Join GO-FOR-GOLD</a>
+        </div>
+        
+        <a data-ms-action="logout" class="logout-link">Log Out</a>
+    </div>
+
+    <script>
+        // Simple logic to ensure the UI feels snappy
+        window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
+            if (member && member.planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg')) {
+                console.log("GO-FOR-GOLD Member verified.");
+            }
+        });
+    </script>
+</body>
+</html>
