@@ -3,54 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GO-FOR-GOLD Exclusive Gateway</title>
-    
-    <!-- Memberstack Header Script -->
+    <title>GO-FOR-GOLD | Member Gateway</title>
+    <!-- Memberstack Script -->
     <script data-memberstack-app="app_cmlt23jfd002u0stjhljd13s9" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
-
+    
+    <!-- Google Fonts for a Premium Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; padding: 50px; background: #1a1a1a; color: white; }
-        .container { background: #2a2a2a; padding: 40px; border-radius: 12px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 500px; width: 90%; }
-        .hidden { display: none; }
-        .gold-text { color: #D4AF37; text-transform: uppercase; letter-spacing: 2px; }
-        .btn { display: block; background: #D4AF37; color: black; padding: 18px 25px; margin: 15px 0; text-decoration: none; border-radius: 8px; font-weight: bold; transition: transform 0.2s; }
-        .btn:hover { transform: scale(1.02); background: #f1c40f; }
-        .logout-link { margin-top: 20px; display: inline-block; color: #888; text-decoration: none; font-size: 0.9em; cursor: pointer; }
+        :root {
+            --gold: #c5a059; /* Muted premium gold from Gamma */
+            --dark-bg: #0f0f0f; /* Deep charcoal black */
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        body { 
+            background-color: var(--dark-bg); 
+            color: #ffffff; 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            /* Subtle radial gradient to give depth like the Gamma page */
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 100%);
+        }
+
+        .container { 
+            background: var(--glass);
+            border: 1px solid rgba(197, 160, 89, 0.2); /* Subtle gold border */
+            padding: 60px 40px; 
+            border-radius: 4px; /* Sharp corners for a more formal look */
+            max-width: 450px; 
+            width: 90%; 
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .gold-text { 
+            font-family: 'Cinzel', serif; /* Elegant Serif font */
+            color: var(--gold); 
+            letter-spacing: 6px; 
+            font-size: 24px; 
+            margin-top: 20px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 40px;
+        }
+
+        .btn { 
+            background-color: var(--gold); 
+            color: #000; 
+            padding: 18px 30px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 14px;
+            display: inline-block; 
+            transition: all 0.4s ease; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+
+        .btn:hover { 
+            background-color: #e2c07d; 
+            letter-spacing: 3px;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.3);
+        }
+
+        .secondary-btn { 
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.3);
+            margin-top: 30px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .secondary-btn:hover {
+            color: var(--gold);
+        }
+
+        hr { 
+            border: 0; 
+            border-top: 1px solid rgba(197, 160, 89, 0.1); 
+            margin: 40px 0; 
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <img src="GO-FOR-GOLD CLUB LOGO.png" alt="Logo" style="width: 150px; margin-bottom: 20px;">
+        <!-- Branded Logo -->
+        <img src="GO-FOR-GOLD CLUB LOGO.png" alt="Logo" style="max-width: 150px; height: auto;">
+        
         <h1 class="gold-text">GO-FOR-GOLD</h1>
-        <p>GO-FOR-GOLD Club Member Gateway</p>
-        <hr style="border: 0; border-top: 1px solid #444; margin: 25px 0;">
+        <div class="subtitle">Private Member Gateway</div>
         
-        <!-- PREMIUM CONTENT: Only visible to GO-FOR-GOLD members -->
-        <div id="premium-content" data-ms-content="pln_go-for-gold-club-membership-o0su0eqg">
-            <h2>Welcome, Member</h2>
-            <p>Select your exclusive Gamma training:</p>
-            <a href="YOUR_GAMMA_LINK_1" class="btn" target="_blank">Access Course Alpha</a>
-            <a href="YOUR_GAMMA_LINK_2" class="btn" target="_blank">Access Course Beta</a>
-            <a href="YOUR_GAMMA_LINK_3" class="btn" target="_blank">Access Course Gamma</a>
+        <hr>
+
+        <!-- PREMIUM CONTENT: Visible to members -->
+        <div data-ms-content="gold">
+            <a href="https://landing-page-8yan0s4.gamma.site/landing-page" class="btn">ENTER THE CLUB</a>
+            <a href="#" data-ms-action="logout" class="secondary-btn">Sign Out</a>
         </div>
 
-        <!-- PUBLIC/NO ACCESS: Visible to everyone else -->
-        <div id="no-access" data-ms-content="!pln_go-for-gold-club-membership-o0su0eqg">
-            <p>This area is reserved for <strong>GO-FOR-GOLD</strong> members only.</p>
-            <a href="#/ms/signup/pln_go-for-gold-club-membership-o0su0eqg" class="btn">Join GO-FOR-GOLD</a>
+        <!-- FALLBACK: Visible to non-logged in users -->
+        <div data-ms-content="!members">
+            <p style="margin-bottom: 30px; font-weight: 300; color: rgba(255,255,255,0.7);">Please authenticate to access your private repository.</p>
+            <a href="#" data-ms-modal="login" class="btn">MEMBER LOGIN</a>
         </div>
-        
-        <a data-ms-action="logout" class="logout-link">Log Out</a>
     </div>
-
-    <script>
-        // Simple logic to ensure the UI feels snappy
-        window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
-            if (member && member.planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg')) {
-                console.log("GO-FOR-GOLD Member verified.");
-            }
-        });
-    </script>
 </body>
 </html>
