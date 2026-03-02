@@ -8,7 +8,7 @@
     <!-- Memberstack Script -->
     <script data-memberstack-app="app_cmlt23jfd002u0stjhljd13s9" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
     
-    <!-- Google Fonts for the Premium Logo Look -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
@@ -34,15 +34,16 @@
             width: 90%; 
         }
 
-        /* RESTORED: Your original Logo Styling */
-        .gold-text { 
-            font-family: 'Cinzel', serif;
-            color: var(--gold); 
-            letter-spacing: 6px; 
-            font-size: 24px; 
+        /* LOGO STYLING */
+        .logo-container {
             margin-bottom: 40px;
-            text-transform: uppercase;
+        }
+
+        .logo-image {
+            max-width: 280px; /* Adjusted for a premium look */
+            height: auto;
             display: block;
+            margin: 0 auto;
         }
 
         .btn { 
@@ -81,8 +82,10 @@
 <body>
 
     <div class="container">
-        <!-- RESTORED: Your Original Logo -->
-        <div class="gold-text">GO-FOR-GOLD</div>
+        <div class="logo-container">
+            <!-- EXACT FILENAME RESTORED -->
+            <img src="GO-FOR-GOLD%20CLUB%20LOGO.png" alt="GO-FOR-GOLD CLUB" class="logo-image">
+        </div>
 
         <!-- Memberstack Login Trigger -->
         <button data-ms-modal="login" class="btn">
