@@ -20,39 +20,22 @@
         .btn { background-color: var(--gold); color: #000; padding: 20px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; transition: all 0.3s ease; border: none; cursor: pointer; width: 100%; }
         .btn:hover { background-color: #e2c07d; box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); }
         .forgot-link { display: inline-block; margin-top: 25px; color: rgba(255,255,255,0.4); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; cursor: pointer; }
-        
-        /* Hide content initially to prevent flicker */
-        #main-content { display: none; }
     </style>
 
     <script>
-        // 1. Set a "Safety Timer" (3 seconds)
-        // If the redirect hasn't happened by then, show the login button anyway.
-        const safetyTimer = setTimeout(() => {
-            document.getElementById('main-content').style.display = 'block';
-        }, 3000);
-
-        // 2. SMART REDIRECT LOGIC
+        // SMART REDIRECT LOGIC
+        // We wait for Memberstack to be ready, then check the member status.
         window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
             if (member) {
-                // Member is logged in! Cancel the timer and redirect to Gamma.
-                clearTimeout(safetyTimer);
+                // If they are logged in, send them to Gamma immediately.
                 window.location.href = "https://landing-page-8yan0s4.gamma.site/landing-page";
-            } else {
-                // No member found. Cancel the timer and show the login button immediately.
-                clearTimeout(safetyTimer);
-                document.getElementById('main-content').style.display = 'block';
             }
-        }).catch(() => {
-            // If there's an error, show the login button as a backup.
-            clearTimeout(safetyTimer);
-            document.getElementById('main-content').style.display = 'block';
         });
     </script>
 </head>
 <body>
 
-    <div id="main-content" class="container">
+    <div class="container">
         <div class="logo-container">
             <img src="GO-FOR-GOLD%20CLUB%20LOGO.png" alt="GO-FOR-GOLD CLUB" class="logo-image">
         </div>
