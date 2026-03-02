@@ -8,7 +8,7 @@
     <!-- Memberstack Script -->
     <script data-memberstack-app="app_cmlt23jfd002u0stjhljd13s9" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts for the Premium Logo Look -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
@@ -34,16 +34,17 @@
             width: 90%; 
         }
 
+        /* RESTORED: Your original Logo Styling */
         .gold-text { 
             font-family: 'Cinzel', serif;
             color: var(--gold); 
             letter-spacing: 6px; 
-            font-size: 28px; 
+            font-size: 24px; 
             margin-bottom: 40px;
             text-transform: uppercase;
+            display: block;
         }
 
-        /* THE ONLY BUTTON */
         .btn { 
             background-color: var(--gold); 
             color: #000; 
@@ -65,7 +66,6 @@
             box-shadow: 0 0 20px rgba(197, 160, 89, 0.3);
         }
 
-        /* Subtle Forgot Password Link */
         .forgot-link {
             display: inline-block;
             margin-top: 25px;
@@ -81,15 +81,15 @@
 <body>
 
     <div class="container">
-        <!-- Your Branding -->
+        <!-- RESTORED: Your Original Logo -->
         <div class="gold-text">GO-FOR-GOLD</div>
 
-        <!-- SINGLE BUTTON: Triggers the Login Modal -->
+        <!-- Memberstack Login Trigger -->
         <button data-ms-modal="login" class="btn">
             Member Access
         </button>
 
-        <!-- TEXT LINK: Triggers the Password Reset Modal -->
+        <!-- Memberstack Forgot Password Trigger -->
         <a data-ms-modal="forgot-password" class="forgot-link">
             Reset Password
         </a>
