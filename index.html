@@ -13,37 +13,61 @@
     
     <style>
         :root { --gold: #c5a059; --dark-bg: #0f0f0f; }
-        body { background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 100%); color: #ffffff; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        body { 
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 100%); 
+            color: #ffffff; 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
         .container { text-align: center; max-width: 400px; width: 90%; }
         .logo-container { margin-bottom: 40px; }
         .logo-image { max-width: 280px; height: auto; display: block; margin: 0 auto; }
-        .btn { background-color: var(--gold); color: #000; padding: 20px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; display: block; transition: all 0.3s ease; border: none; cursor: pointer; width: 100%; }
+        .btn { 
+            background-color: var(--gold); 
+            color: #000; 
+            padding: 20px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-size: 14px; 
+            display: block; 
+            transition: all 0.3s ease; 
+            border: none; 
+            cursor: pointer; 
+            width: 100%; 
+        }
         .btn:hover { background-color: #e2c07d; box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); }
-        .forgot-link { display: inline-block; margin-top: 25px; color: rgba(255,255,255,0.4); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; cursor: pointer; }
+        .forgot-link { 
+            display: inline-block; 
+            margin-top: 25px; 
+            color: rgba(255,255,255,0.4); 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            text-decoration: none; 
+            cursor: pointer; 
+        }
     </style>
-
-    <script>
-        // SMART REDIRECT LOGIC
-        // We wait for Memberstack to be ready, then check the member status.
-        window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
-            if (member) {
-                // If they are logged in, send them to Gamma immediately.
-                window.location.href = "https://landing-page-8yan0s4.gamma.site/landing-page";
-            }
-        });
-    </script>
 </head>
 <body>
 
     <div class="container">
         <div class="logo-container">
+            <!-- Ensure this file is in the same folder on GitHub -->
             <img src="GO-FOR-GOLD%20CLUB%20LOGO.png" alt="GO-FOR-GOLD CLUB" class="logo-image">
         </div>
 
+        <!-- Memberstack Login Trigger -->
         <button data-ms-modal="login" class="btn">
             Member Access
         </button>
 
+        <!-- Memberstack Forgot Password Trigger -->
         <a data-ms-modal="forgot-password" class="forgot-link">
             Reset Password
         </a>
