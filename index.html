@@ -13,6 +13,8 @@
     
     <style>
         :root { --gold: #c5a059; --dark-bg: #0f0f0f; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; }
+        
         body { 
             background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 100%); 
             color: #ffffff; 
@@ -21,11 +23,14 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
-            margin: 0; 
         }
-        .container { text-align: center; max-width: 400px; width: 90%; }
+
+        /* Container for the Gateway UI */
+        .container { text-align: center; max-width: 400px; width: 90%; display: none; }
+        
         .logo-container { margin-bottom: 40px; }
         .logo-image { max-width: 280px; height: auto; display: block; margin: 0 auto; }
+        
         .btn { 
             background-color: var(--gold); 
             color: #000; 
@@ -42,6 +47,7 @@
             width: 100%; 
         }
         .btn:hover { background-color: #e2c07d; box-shadow: 0 0 20px rgba(197, 160, 89, 0.3); }
+        
         .forgot-link { 
             display: inline-block; 
             margin-top: 25px; 
@@ -52,26 +58,73 @@
             text-decoration: none; 
             cursor: pointer; 
         }
+
+        /* Full-screen Iframe for Gamma */
+        #member-content { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            border: none; 
+            z-index: 100;
+        }
+
+        /* Loading state */
+        #loading-screen { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- 1. Loading Screen -->
+    <div id="loading-screen">VERIFYING ACCESS...</div>
+
+    <!-- 2. The Gateway UI (Logged Out) -->
+    <div class="container" id="gateway-ui">
         <div class="logo-container">
-            <!-- Ensure this file is in the same folder on GitHub -->
             <img src="GO-FOR-GOLD%20CLUB%20LOGO.png" alt="GO-FOR-GOLD CLUB" class="logo-image">
         </div>
 
-        <!-- Memberstack Login Trigger -->
         <button data-ms-modal="login" class="btn">
             Member Access
         </button>
 
-        <!-- Memberstack Forgot Password Trigger -->
         <a data-ms-modal="forgot-password" class="forgot-link">
             Reset Password
         </a>
     </div>
+
+    <!-- 3. The Wrapped Content (Logged In) -->
+    <iframe id="member-content" src="https://landing-page-8yan0s4.gamma.site/landing-page"></iframe>
+
+    <script>
+    window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
+        const loading = document.getElementById('loading-screen');
+        const gateway = document.getElementById('gateway-ui');
+        const content = document.getElementById('member-content');
+
+        if (member) {
+            // Check for the specific Gold Plan
+            const planIds = member.planConnections ? member.planConnections.map(p => p.planId) : [];
+            const hasGoldPlan = planIds.includes('pln_go-for-gold-club-membership-o0su0eqg');
+
+            if (hasGoldPlan) {
+                // Member has access - Show Gamma Iframe
+                loading.style.display = 'none';
+                content.style.display = 'block';
+            } else {
+                // Logged in but wrong plan - Redirect to Gateway
+                window.location.href = "https://jason19july.github.io/GO-FOR-GOLD-/index.html";
+            }
+        } else {
+            // Not logged in - Show Login UI
+            loading.style.display = 'none';
+            gateway.style.display = 'block';
+        }
+    }).catch((error) => {
+        console.error("Auth Error:", error);
+        document.getElementById('loading-screen').innerText = "ERROR LOADING ACCESS";
+    });
+    </script>
 
 </body>
 </html>
