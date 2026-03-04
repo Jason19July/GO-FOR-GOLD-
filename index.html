@@ -102,7 +102,6 @@
         const gateway = document.getElementById('gateway-ui');
         const content = document.getElementById('member-content');
 
-        // Always hide the loading screen once we have a member status
         loading.style.display = 'none';
 
         if (member) {
@@ -111,18 +110,19 @@
             const hasGoldPlan = planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg');
 
             if (hasGoldPlan) {
-                // SUCCESS: Member is on the GitHub page and has access
-                // We show the iframe, keeping the URL as your GitHub address
+                // MASKING: Show the iframe content but stay on the GitHub URL
                 content.style.display = 'block';
                 gateway.style.display = 'none';
+                
+                // Optional: Force the iframe to the correct source just in case
+                content.src = "https://landing-page-8yan0s4.gamma.site/landing-page";
             } else {
-                // LOGGED IN BUT NO ACCESS: Show the login/gateway UI 
-                // This keeps them on the GitHub page so they can see the "Access" button
+                // Logged in but no plan - show the gateway on the GitHub page
                 gateway.style.display = 'block';
                 content.style.display = 'none';
             }
         } else {
-            // NOT LOGGED IN: Show the gateway UI on the GitHub page
+            // Not logged in - show the gateway on the GitHub page
             gateway.style.display = 'block';
             content.style.display = 'none';
         }
@@ -131,7 +131,7 @@
         document.getElementById('loading-screen').innerText = "ERROR LOADING ACCESS";
     });
 
-    // If they log out, refresh the GitHub page to reset the gateway
+    // Refresh on logout to reset the gateway
     window.$memberstackDom.on('member.loggedOut', () => {
         window.location.reload();
     });
