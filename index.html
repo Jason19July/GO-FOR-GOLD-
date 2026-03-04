@@ -71,6 +71,11 @@
 
         /* Loading state */
         #loading-screen { color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 2px; }
+
+        /* HIDE THE KITCHEN ACADEMY LOGO IN THE LOGIN MODAL */
+        #msOverlay [data-element="modal-logo"] {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -102,6 +107,7 @@
         const gateway = document.getElementById('gateway-ui');
         const content = document.getElementById('member-content');
 
+        // Always hide loading once we have a response
         loading.style.display = 'none';
 
         if (member) {
@@ -110,19 +116,16 @@
             const hasGoldPlan = planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg');
 
             if (hasGoldPlan) {
-                // MASKING: Show the iframe content but stay on the GitHub URL
+                // SUCCESS: Show the iframe, stay on GitHub URL
                 content.style.display = 'block';
                 gateway.style.display = 'none';
-                
-                // Optional: Force the iframe to the correct source just in case
-                content.src = "https://landing-page-8yan0s4.gamma.site/landing-page";
             } else {
-                // Logged in but no plan - show the gateway on the GitHub page
+                // Logged in but wrong plan
                 gateway.style.display = 'block';
                 content.style.display = 'none';
             }
         } else {
-            // Not logged in - show the gateway on the GitHub page
+            // Not logged in
             gateway.style.display = 'block';
             content.style.display = 'none';
         }
@@ -131,13 +134,10 @@
         document.getElementById('loading-screen').innerText = "ERROR LOADING ACCESS";
     });
 
-    // Refresh on logout to reset the gateway
+    // Refresh page on logout to reset the UI
     window.$memberstackDom.on('member.loggedOut', () => {
         window.location.reload();
     });
-</script>
-
-
-
+    </script>
 </body>
 </html>
