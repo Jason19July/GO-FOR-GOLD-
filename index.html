@@ -102,29 +102,41 @@
         const gateway = document.getElementById('gateway-ui');
         const content = document.getElementById('member-content');
 
+        // Always hide loading once we have a response
+        loading.style.display = 'none';
+
         if (member) {
             // Check for the specific Gold Plan
-            const planIds = member.planConnections ? member.planConnections.map(p => p.planId) : [];
-            const hasGoldPlan = planIds.includes('pln_go-for-gold-club-membership-o0su0eqg');
+            const planConnections = member.planConnections || [];
+            const hasGoldPlan = planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg');
 
             if (hasGoldPlan) {
                 // Member has access - Show Gamma Iframe
-                loading.style.display = 'none';
                 content.style.display = 'block';
+                gateway.style.display = 'none';
             } else {
-                // Logged in but wrong plan - Redirect to Gateway
-                window.location.href = "https://jason19july.github.io/GO-FOR-GOLD-/index.html";
+                // Logged in but missing the Gold Plan
+                // We show the Gateway UI instead of redirecting to avoid loops
+                gateway.style.display = 'block';
+                content.style.display = 'none';
+                console.warn("Member logged in but missing required Gold Plan.");
             }
         } else {
             // Not logged in - Show Login UI
-            loading.style.display = 'none';
             gateway.style.display = 'block';
+            content.style.display = 'none';
         }
     }).catch((error) => {
         console.error("Auth Error:", error);
         document.getElementById('loading-screen').innerText = "ERROR LOADING ACCESS";
     });
-    </script>
+
+    // Optional: Refresh if they log out while on the page
+    window.$memberstackDom.on('member.loggedOut', () => {
+        window.location.reload();
+    });
+</script>
+
 
 </body>
 </html>
