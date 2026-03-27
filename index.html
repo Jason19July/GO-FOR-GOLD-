@@ -101,43 +101,28 @@
     <!-- 3. The Wrapped Content (Logged In) -->
     <iframe id="member-content" src="https://landing-page-8yan0s4.gamma.site/landing-page"></iframe>
 
+    <!-- 4. The Logic Script -->
     <script>
-    window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
-        const loading = document.getElementById('loading-screen');
-        const gateway = document.getElementById('gateway-ui');
-        const content = document.getElementById('member-content');
+        // Check if the user is logged in
+        window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const gatewayUi = document.getElementById('gateway-ui');
+            const memberContent = document.getElementById('member-content');
 
-        // Always hide loading once we have a response
-        loading.style.display = 'none';
-
-        if (member) {
-            // Check for the specific Gold Plan
-            const planConnections = member.planConnections || [];
-            const hasGoldPlan = planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg');
-
-            if (hasGoldPlan) {
-                // SUCCESS: Show the iframe, stay on GitHub URL
-                content.style.display = 'block';
-                gateway.style.display = 'none';
+            if (member) {
+                // The member IS logged in! 
+                // Hide the loading text and login button, and show the Gamma iframe
+                loadingScreen.style.display = 'none';
+                gatewayUi.style.display = 'none';
+                memberContent.style.display = 'block';
             } else {
-                // Logged in but wrong plan
-                gateway.style.display = 'block';
-                content.style.display = 'none';
+                // The member is NOT logged in. 
+                // Hide the loading text and show the login button
+                loadingScreen.style.display = 'none';
+                gatewayUi.style.display = 'block';
+                memberContent.style.display = 'none';
             }
-        } else {
-            // Not logged in
-            gateway.style.display = 'block';
-            content.style.display = 'none';
-        }
-    }).catch((error) => {
-        console.error("Auth Error:", error);
-        document.getElementById('loading-screen').innerText = "ERROR LOADING ACCESS";
-    });
-
-    // Refresh page on logout to reset the UI
-    window.$memberstackDom.on('member.loggedOut', () => {
-        window.location.reload();
-    });
+        });
     </script>
 </body>
 </html>
