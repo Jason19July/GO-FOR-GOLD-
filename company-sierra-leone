@@ -129,3 +129,28 @@
     </script>
 </body>
 </html>
+    <!-- 4. The Logic Script -->
+    <script>
+        window.$memberstackDom.getCurrentMember().then(({ data: member }) => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const gatewayUi = document.getElementById('gateway-ui');
+            const memberContent = document.getElementById('member-content');
+
+            // Check if member exists AND has the GO-FOR-GOLD plan
+            const hasGoldPlan = member && member.planConnections && member.planConnections.some(p => p.planId === 'pln_go-for-gold-club-membership-o0su0eqg');
+
+            if (hasGoldPlan) {
+                // The member IS logged in AND has the right plan! 
+                loadingScreen.style.display = 'none';
+                memberContent.style.display = 'block';
+            } else {
+                // The member is NOT logged in, OR doesn't have the right plan
+                loadingScreen.style.display = 'none';
+                gatewayUi.style.display = 'block';
+            }
+        });
+
+        // 5. Disable Right-Click on the wrapper
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+
